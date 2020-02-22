@@ -1,7 +1,7 @@
 import React  from 'react';
 import Searchbar from './components/Searchbar';
 import MovieList from './components/MovieList';
-import PaginationCo from './components/PaginationCo'
+import PaginationCo from './components/PaginationCo';
 import axios from "axios";
 import 'bootstrap/dist/css/bootstrap.min.css';
 export default class App extends React.Component {
@@ -10,7 +10,7 @@ export default class App extends React.Component {
     this.state = {
       content: [],
       userseach:'',
-      totalPage:0,
+      totalPages:0,
       currentPage: 1,
 
     };
@@ -31,6 +31,7 @@ export default class App extends React.Component {
       console.log(response) 
       console.log(`Fetching details for ${response.data.results}`);
       console.log(response.data)
+      console.log(response.data.total_pages);
       this.setState({ content:[...response.data.results], totalPages: response.data.total_pages})
      })
       
@@ -43,16 +44,15 @@ export default class App extends React.Component {
   }
 
   nextPage = (pageNumber) => {
-    const PageUrl = `https://api.themoviedb.org/3/search/movie?api_key=${this.apiKey}&query=${this.state.userseach}&page=${pageNumber}`
+
     axios({
       method: 'GET',
-      url: PageUrl
+      url: `https://api.themoviedb.org/3/search/movie?api_key=${this.apiKey}&query=${this.state.userseach}&page=${pageNumber}`
     })
     .then(response => {
       console.log(response) 
-      console.log(`tootalPage is ${response.data.results.total_pages}`);
-      console.log(response.data.results.total_pages);
-      this.setState({ content:[...response.data.results],currentPage: pageNumber})
+      console.log(`tootalPage is ${response.data.total_pages}`);
+      this.setState({ totalPage:[...response.data.results], currentPage: pageNumber})
      })
       
     .catch(err => {
@@ -68,7 +68,7 @@ export default class App extends React.Component {
 
           <Searchbar handleDetails={this.handleDetails} handleChange = {this.handleChange} />
           <MovieList content={st.content}/>
-          {st.totalPage >= 2 ?  <PaginationCo pages = {st.totalPage} nextPage = {this.nextPage} currentPage = {st.currentPage}/> :''}
+          {st.totalPages >= 2 ?  <PaginationCo pages = {st.totalPages} nextPage = {this.nextPage} currentPage = {st.currentPage}/> :''}
         
         </div>
     );
