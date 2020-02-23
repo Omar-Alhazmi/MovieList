@@ -12,7 +12,9 @@ export default function MovieList(props) {
             {
                 props.content.map((movie, index) => {
                     return (
-                        <MovieDetails key={index} image={movie.poster_path} alt="Card image cap" />
+                        <MovieDetails key={index} image={movie.poster_path} alt="Card image cap" 
+                        title={movie.title}
+                        overview={movie.overview}/>
 
                     )
                 })

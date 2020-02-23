@@ -31,7 +31,6 @@ export default class App extends React.Component {
       console.log(response) 
       console.log(`Fetching details for ${response.data.results}`);
       console.log(response.data)
-      console.log(response.data.total_pages);
       this.setState({ content:[...response.data.results], totalPages: response.data.total_pages})
      })
       
@@ -52,7 +51,7 @@ export default class App extends React.Component {
     .then(response => {
       console.log(response) 
       console.log(`tootalPage is ${response.data.total_pages}`);
-      this.setState({ totalPage:[...response.data.results], currentPage: pageNumber})
+      this.setState({ content:[...response.data.results], currentPage: pageNumber })
      })
       
     .catch(err => {
