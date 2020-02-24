@@ -1,9 +1,7 @@
 import React from 'react'
 import './chosenMovie.css';
 
-import {
-    Card,  Button,
-} from 'react-bootstrap';
+
 
 export default function ChosenMovie(props) {
   const background = `https://image.tmdb.org/t/p/w780/${props.currentMovie.poster_path}`
@@ -17,7 +15,6 @@ export default function ChosenMovie(props) {
                     }
       <h1>{props.currentMovie.title}</h1>
       <h4>{props.currentMovie.release_date}</h4>
-      <span className="minutes">117 min</span>
       <p className="type">Action, Crime, Fantasy</p>
     </div>
     <div className="movie_desc">
@@ -27,6 +24,7 @@ export default function ChosenMovie(props) {
     </div>
     <div className="movie_social">
       <ul>
+      <li><i className="material-icons" onClick={props.closeMovieDetails}>arrow_back</i></li>
         <li><i className="material-icons">share</i></li>
         <li><i className="material-icons"></i></li>
         <li><i className="material-icons">chat_bubble</i></li>
