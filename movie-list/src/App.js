@@ -3,7 +3,9 @@ import Searchbar from './components/Searchbar';
 import MovieList from './components/MovieList';
 import PaginationCo from './components/PaginationCo';
 import ChosenMovie from './components/ChosenMovie';
+
 import axios from "axios";
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 export default class App extends React.Component {
   constructor() {
@@ -95,16 +97,17 @@ export default class App extends React.Component {
   render() {
     const st = this.state;
     return (
+
       <div className="film-library">
-        {st.currentMovie == null ? <div> <Searchbar handleDetails={this.handleDetails} handleChange={this.handleChange} />
-                                  <MovieList content={st.content} viewMovieDetails={this.viewMovieDetails} /> </div> : 
-                                  <ChosenMovie currentMovie={st.currentMovie} closeMovieDetails={this.closeMovieDetails}/>}
+      
+        
+        {st.currentMovie == null ? <div><Searchbar handleDetails={this.handleDetails} handleChange={this.handleChange}/><MovieList content={st.content} viewMovieDetails={this.viewMovieDetails} /> </div> : 
+                  <ChosenMovie currentMovie={st.currentMovie} closeMovieDetails={this.closeMovieDetails}/>}
         {st.totalPages >= 2 && st.currentMovie == null ? <PaginationCo currentPageSearch={st.currentPageSearch} pages={st.totalPages} totalMainPages={st.totalMainPages} totalSearchPages={st.totalSearchPages} nextPageMain={this.nextPageMain} nextPage={this.nextPage} currentPage={st.currentPage} /> : ''}
 
       </div>
     );
   }
-
   componentDidMount() {
     const topRatedMoviUrl = `https://api.themoviedb.org/3/movie/top_rated?api_key=${this.apiKey}&language=en-US`
     axios({
@@ -117,12 +120,9 @@ export default class App extends React.Component {
         console.log(response.data)
         this.setState({ content: [...response.data.results], totalPages: response.data.total_pages })
       })
-
       .catch(err => {
         console.log(err);
       });
    
   }
 }
-
-

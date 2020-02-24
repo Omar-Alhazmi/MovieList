@@ -1,15 +1,18 @@
 import React from 'react';
 import './moviedetail.css';
+import ChosenMovie from './ChosenMovie';
+
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
-import { Card} from 'react-bootstrap';
-
+import { Card
+} from 'react-bootstrap';
 
 export default function MovieDetails(props) {
     return (
         <div>
-            
-                <Card style={{ width:'25rem'}}  onClick={()=> props.viewMovieDetails(props.movieId)}>
+  
+
+                <Card style={{ width:'25rem'}}  onClick={()=> {props.viewMovieDetails(props.movieId)}}>
                     <div  className="cip" >     <CircularProgressbar value={props.voteAverage} maxValue={10} text={`${props.voteAverage === 0 ? 'NR' : props.voteAverage * 10 }%`} />
 </div>
                     {
