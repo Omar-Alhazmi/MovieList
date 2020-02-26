@@ -101,7 +101,9 @@ export default class App extends React.Component {
       <div className="film-library">
       
         
-        {st.currentMovie == null ? <div><Searchbar handleDetails={this.handleDetails} handleChange={this.handleChange}/><MovieList content={st.content} viewMovieDetails={this.viewMovieDetails} /> </div> : 
+        {st.currentMovie == null ? <div><Searchbar handleDetails={this.handleDetails} handleChange={this.handleChange}/>
+        <MovieList content={st.content} viewMovieDetails={this.viewMovieDetails} />
+         </div> : 
                   <ChosenMovie currentMovie={st.currentMovie} closeMovieDetails={this.closeMovieDetails}/>}
         {st.totalPages >= 2 && st.currentMovie == null ? <PaginationCo currentPageSearch={st.currentPageSearch} pages={st.totalPages} totalMainPages={st.totalMainPages} totalSearchPages={st.totalSearchPages} nextPageMain={this.nextPageMain} nextPage={this.nextPage} currentPage={st.currentPage} /> : ''}
 

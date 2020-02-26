@@ -6,21 +6,27 @@ import {
 
 } from 'react-bootstrap';
 
-export default function MovieList(props) {
+export default class MovieList extends React.Component {
+
+  
+     
+
+    render() {
+
     return (
 
    
-<CardGroup className="cardg">
+        <CardGroup className="cardg">
 
             {
-                props.content.map((movie, index) => {
+                this.props.content.map((movie, index) => {
                     return (
                         <MovieDetails key={index} image={movie.poster_path} alt="Card image cap" 
                         movieId = {movie.id}
                         title={movie.title}
                         overview={movie.overview}
                         voteAverage={movie.vote_average}
-                        viewMovieDetails = {props.viewMovieDetails}
+                        viewMovieDetails = {this.props.viewMovieDetails}
                         />
 
                     )
@@ -34,5 +40,5 @@ export default function MovieList(props) {
 
 
     )
-}
+}}
 
