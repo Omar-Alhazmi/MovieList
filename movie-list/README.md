@@ -58,7 +58,9 @@ remove all review from the database
 ## Built with
 
 * react
-* firebase
+* firebaseDatabase
+* Axios
+* Postman
 * react-circular-progressbar
 * reactstrap
 * react-bootstrap

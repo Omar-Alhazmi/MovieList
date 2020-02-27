@@ -35,7 +35,6 @@ export default class ChosenMovie extends React.Component {
       }
       let reviews = this.state.reviews;
       reviews.push(review);
-
       this.setState({
         reviews: reviews
       });
@@ -49,7 +48,6 @@ export default class ChosenMovie extends React.Component {
   }
   // this function responsible for push user input to the database
   createreviews() {
-
     firebase.database().ref('reviews').push({
       name: this.state.name,
       review: this.state.review,
@@ -106,7 +104,6 @@ export default class ChosenMovie extends React.Component {
     return (
 
       <div>
-
         <div class="movie_card" id="bright" style={{ backgroundImage: `url(${background})` }} >
           <div class="info_section">
             <div class="movie_header">
