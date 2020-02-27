@@ -115,7 +115,7 @@ export default class ChosenMovie extends React.Component {
                 crm.poster_path == null ? <img className="locandina" alt="..." src={`https://p.kindpng.com/picc/s/62-629944_frame-decorative-movie-cinema-empty-frame-film-bingkai.png`} alt="Movie Image" /> : <img className="locandina" alt="..." src={`https://image.tmdb.org/t/p/w780/${crm.poster_path}`} alt="Movie Image" />
               }  <h1>{crm.title}</h1>
               <h4></h4>
-              <span class="minutes"><div className="cl"><CircularProgressbar value={crm.voteAverage} maxValue={10} text={`${crm.voteAverage === 0 ? 'NR' : crm.voteAverage * 10}%`} /></div></span>
+              <span class="minutes"><div className="cl"><CircularProgressbar value={crm.vote_average} maxValue={10} text={`${crm.vote_average === 0 ? 'NR' : crm.vote_average * 10}%`} /></div></span>
               <p class="type"></p>
             </div>
             <div class="movie_desc">
@@ -155,7 +155,7 @@ export default class ChosenMovie extends React.Component {
               </div>
               <div class="movie_social">
                 <ul>
-                                    <li><i class="material-icons" onClick={() => this.removereview(revie.id)}>delete</i></li>
+                  <li><i class="material-icons" onClick={() => this.removereview(revie.id)}>delete</i></li>
                   <li><i class="material-icons" onClick={() => this.toggle(revie.id)}>edit</i></li>
                 </ul>
               </div>
@@ -166,43 +166,33 @@ export default class ChosenMovie extends React.Component {
 
         )) : ''
         }
- 
- 
-
-  
- 
-
-
         <Drawer
           open={open}
           onRequestClose={this.toggle}>
-          <div>
-           
+          <div>           
              <Form controlId="formBasicEmail" onSubmit={this.createreviews}>
               <input
+              style={{display: "block" , margin: "10px 0"}}
               type="text"
                 name="name"
                 placeholder="Name"
                 onChange={(evt) => this.onChangeHandler(evt, 'name')}
                 value={this.state.name}
-              />
-         
+              />    
               <input
+                style={{display: "block"}}
                 type="textarea"
                 name="review"
                 placeholder="review"
                 onChange={(evt) => this.onChangeHandler(evt, 'review')}
                 value={this.state.review}
               />
- 
-
-              <Button outline color="secondary" onClick={this.createreviews}>Submit</Button>
+              <Button               style={{margin: "10px 19px 10px 0"}}
+ outline color="secondary" onClick={this.createreviews}>Submit</Button>
               <Button outline color="secondary" onClick={() => this.updatereview(this.state.currentID)}>update</Button>
-
             </Form>
           </div>
         </Drawer>
-
       </div>
 
 

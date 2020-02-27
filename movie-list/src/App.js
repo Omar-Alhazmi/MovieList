@@ -98,9 +98,7 @@ export default class App extends React.Component {
     const st = this.state;
     return (
 
-      <div className="film-library">
-      
-        
+      <div className="film-library">    
         {st.currentMovie == null ? <div><Searchbar handleDetails={this.handleDetails} handleChange={this.handleChange}/>
         <MovieList content={st.content} viewMovieDetails={this.viewMovieDetails} />
          </div> : 
