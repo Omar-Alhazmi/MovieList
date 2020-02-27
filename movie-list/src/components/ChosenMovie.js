@@ -20,20 +20,20 @@ export default class ChosenMovie extends React.Component {
     }
     this.createreviews = this.createreviews.bind(this);
   }
-
   componentDidMount() {
     this.db = firebase.database();
     this.listenForChange();
   }
-// this function responsible for  connection with the database 
+  // this function responsible for  connection with the database 
   listenForChange() {
     this.db.ref('reviews').on('child_added', snapshot => {
       let review = {
         id: snapshot.key,
         name: snapshot.val().name,
         review: snapshot.val().review,
+        isFave: snapshot.val().isFave,
       }
-  let reviews = this.state.reviews;
+      let reviews = this.state.reviews;
       reviews.push(review);
 
       this.setState({
@@ -41,34 +41,34 @@ export default class ChosenMovie extends React.Component {
       });
     });
   }
-// this function responsible for handle user input 
+  // this function responsible for handle user input 
   onChangeHandler(evt, key) {
     this.setState({
       [key]: evt.target.value
     });
   }
-// this function responsible for push user input to the database
+  // this function responsible for push user input to the database
   createreviews() {
 
     firebase.database().ref('reviews').push({
       name: this.state.name,
-      review: this.state.review
+      review: this.state.review,
+      isFave: this.state.isFave
     })
   }
-
-// this function responsible for view the input for user review and track the id of the review
+  // this function responsible for view the input for user review and track the id of the review
   toggle = (id) => {
     let { toggle } = this.state
     let { open } = this.state
     this.setState({ toggle: !toggle, open: !open, currentID: id })
   }
-// this function responsible to hide all reviews
+  // this function responsible to hide all reviews
   dell = () => {
 
     let { hide } = this.state
     this.setState({ hide: !hide })
   }
-// this function responsible for update the review
+  // this function responsible for update the review
   updatereview = (id) => {
     console.log(id)
     var updates = {};
@@ -80,7 +80,7 @@ export default class ChosenMovie extends React.Component {
 
     });
   }
-// this function responsible for remove the review
+  // this function responsible for remove the review
   removereview = (id) => {
     firebase.database().ref('reviews').child(id).remove();
     this.db.ref('reviews').on('child_removed', snapshot => {
@@ -92,7 +92,7 @@ export default class ChosenMovie extends React.Component {
     }
     );
   };
-// this function responsible for add movie to favorit
+  // this function responsible for add movie to favorit
   hndClick = () => {
     let { isFave } = this.state
     this.setState({ isFave: !isFave })
@@ -163,32 +163,40 @@ export default class ChosenMovie extends React.Component {
             <div class="blur_back tomb_back"></div>
 
           </div>
-
         )) : ''
         }
         <Drawer
           open={open}
           onRequestClose={this.toggle}>
-          <div>           
-             <Form controlId="formBasicEmail" onSubmit={this.createreviews}>
+          <div>
+            <Form controlId="formBasicEmail" onSubmit={this.createreviews}>
               <input
-              style={{display: "block" , margin: "10px 0"}}
-              type="text"
+                style={{ display: "block", margin: "10px 0" }}
+                type="text"
                 name="name"
                 placeholder="Name"
                 onChange={(evt) => this.onChangeHandler(evt, 'name')}
                 value={this.state.name}
-              />    
+              />
               <input
-                style={{display: "block"}}
+                style={{ display: "block" }}
                 type="textarea"
                 name="review"
                 placeholder="review"
                 onChange={(evt) => this.onChangeHandler(evt, 'review')}
                 value={this.state.review}
               />
-              <Button               style={{margin: "10px 19px 10px 0"}}
- outline color="secondary" onClick={this.createreviews}>Submit</Button>
+
+              <input
+                style={{ display: "block", margin: "10px 0" }}
+                type="checkbox"
+                name="name"
+                placeholder="Name"
+                onChange={(evt) => this.onChangeHandler(evt, this.state.isFave)}
+                value={this.state.name}
+              />
+              <Button style={{ margin: "10px 19px 10px 0" }}
+                outline color="secondary" onClick={this.createreviews}>Submit</Button>
               <Button outline color="secondary" onClick={() => this.updatereview(this.state.currentID)}>update</Button>
             </Form>
           </div>
@@ -199,4 +207,3 @@ export default class ChosenMovie extends React.Component {
     )
   }
 }
-
